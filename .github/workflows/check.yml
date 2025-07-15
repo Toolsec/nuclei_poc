@@ -15,6 +15,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # 添加这行以获取完整提交历史
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -41,11 +43,31 @@ jobs:
     - name: 8 Delete Nuclei
       run: rm -rf nuclei
       
-    - name: Commit and Push changes
+    - name: Update date file
       run: |
-        date +'%Y%m%d' > date.txt
+        # 生成日期到临时文件
+        date +'%Y%m%d' > new_date.txt
+        
+        # 比较新旧日期文件内容
+        if [ -f date.txt ] && ! cmp -s date.txt new_date.txt; then
+          # 日期变化时覆盖原文件
+          mv new_date.txt date.txt
+          echo "DATE_CHANGED=true" >> $GITHUB_ENV
+        elif [ ! -f date.txt ]; then
+          # 如果date.txt不存在，则创建
+          mv new_date.txt date.txt
+          echo "DATE_CHANGED=true" >> $GITHUB_ENV
+        else
+          # 日期未变化时删除临时文件
+          rm new_date.txt
+          echo "DATE_CHANGED=false" >> $GITHUB_ENV
+        fi
+
+    - name: Commit and Push changes
+      if: env.DATE_CHANGED == 'true' || steps.changes.outputs.changed == 'true'
+      run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -am "$(date +'%Y%m%d')"
-        git push -v --progress
+        git commit -m "$(date +'%Y%m%d')"
+        git push
