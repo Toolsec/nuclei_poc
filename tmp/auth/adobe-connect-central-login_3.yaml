@@ -12,12 +12,9 @@ info:
     cpe: cpe:2.3:a:adobe:connect:*:*:*:*:*:*:*:*
   metadata:
     max-request: 1
-    vendor: adobe
     product: connect
-    shodan-query: http.title:"openvpn connect"
-    fofa-query: title="openvpn connect"
-    google-query: intitle:"openvpn connect"
-  tags: adobe,panel,connect-central,discovery
+    vendor: adobe
+  tags: adobe,panel,connect-central
 
 http:
   - method: GET
@@ -34,4 +31,4 @@ http:
       - type: status
         status:
           - 200
-# digest: 4a0a00473045022100d80f4c4950dc82549515e2e02be00fcfc19ab21e8fe9bd8d37f663643927e2e202203a4bc4c3ae93a31c57426de7a26333d287a62b434982a9760f674c98220f548e:922c64590222798bb761d5b6d8e72950
+# digest: 4a0a0047304502207fdc0717180f5c3a2962899d5f7e7dd6ab5af7f30f958f5a8ed4d821d284d492022100f42f33d6101fbbd3889b206a59c44d6a643ef27af203b1f34507d97a5b0a7f00:922c64590222798bb761d5b6d8e72950
