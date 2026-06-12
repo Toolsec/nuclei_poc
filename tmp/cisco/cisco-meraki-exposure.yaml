@@ -1,24 +1,25 @@
 id: cisco-meraki-exposure
 
 info:
-  name: Cisco Meraki Cloud Security Appliance Panel - Detect
+  name: Cisco Meraki cloud & security Appliances Information Disclosure
   author: dhiyaneshDK,r3naissance
   severity: info
-  description: Cisco Meraki Cloud Security Appliance panel was detected.
-  reference:
-    - https://www.exploit-db.com/ghdb/6708
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cwe-id: CWE-200
-  metadata:
-    max-request: 1
-  tags: panel,cisco,meraki,disclosure,edb
+  reference: https://www.exploit-db.com/ghdb/6708
+  tags: panel,cisco,meraki,disclosure
 
-http:
-  - method: GET
-    path:
-      - '{{BaseURL}}/#connection'
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET /#connection HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
@@ -30,4 +31,3 @@ http:
       - type: status
         status:
           - 200
-# digest: 4b0a00483046022100832a4407a01a9f1c03f5e4601c2945d78625670ab02f6bab23ec06a0ee190725022100ba7d3a59db9c869b8a92477520ef2713ca0be58b23f25e8a80c4bebce5ec113c:922c64590222798bb761d5b6d8e72950

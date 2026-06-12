@@ -1,38 +1,33 @@
-id: ssh-authorized-keys
-
+id: ssh-authorized-keys 1
 info:
-  name: SSH Authorized Keys File - Detect
   author: geeknik
-  severity: medium
-  description: SSH authorized keys file was detected.
-  classification:
-    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
-    cvss-score: 5.3
-    cwe-id: CWE-200
-  reference:
-    - https://www.ssh.com/academy/ssh/authorized-key
+  name: SSH Authorized Keys
+  reference: https://www.ssh.com/academy/ssh/authorized-key
+  severity: low
   tags: config,exposure,ssh
-  metadata:
-    max-request: 2
+requests:
+- attack: sniper
+  matchers:
+  - condition: or
+    type: word
+    words:
+    - ssh-dss
+    - ssh-ed25519
+    - ssh-rsa
+    - ecdsa-sha2-nistp256
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+  raw:
+  - 'GET /.ssh/authorized_keys HTTP/1.1
 
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/.ssh/authorized_keys"
-      - "{{BaseURL}}/_/.ssh/authorized_keys"
+    Host: {{Subdomains}}
 
-    matchers-condition: and
-    matchers:
-      - type: word
-        words:
-          - "ssh-dss"
-          - "ssh-ed25519"
-          - "ssh-rsa"
-          - "ecdsa-sha2-nistp256"
-        condition: or
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101
+    Firefox/55
 
-      - type: status
-        status:
-          - 200
-
-# Enhanced by cs on 2023/03/02
+    '
+  threads: 100

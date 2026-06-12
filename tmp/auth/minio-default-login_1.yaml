@@ -1,60 +1,39 @@
-id: minio-default-login
-
+id: minio-default-login 1
 info:
-  name: Minio Default Login
   author: pikpikcu
-  severity: high
-  description: Minio default admin credentials were discovered.
-  reference:
-    - https://docs.min.io/docs/minio-quickstart-guide.html#
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L
-    cvss-score: 8.3
-    cwe-id: CWE-522
-  metadata:
-    max-request: 2
-    shodan-query: http.html:"symfony Profiler"
-    verified: true
+  name: Minio Default Login
+  severity: medium
   tags: default-login,minio
+requests:
+- attack: sniper
+  matchers:
+  - part: header
+    type: word
+    words:
+    - 'Content-Type: application/json'
+  - condition: and
+    part: body
+    type: word
+    words:
+    - uiVersion
+    - token
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+  raw:
+  - 'POST /minio/webrpc HTTP/1.1
 
-http:
-  - raw:
-      - |
-        POST /minio/webrpc HTTP/1.1
-        Host: {{Hostname}}
-        Content-Type: application/json
+    Host: {{Subdomains}}
 
-        {"id":1,"jsonrpc":"2.0","params":{"username":"{{username}}","password":"{{password}}"},"method":"Web.Login"}
+    Accept-Encoding: gzip, deflate
 
-      - |
-        POST /minio/webrpc HTTP/1.1
-        Host: {{Hostname}}
-        Content-Type: application/json
+    Content-Type: application/json
 
-        {"id":1,"jsonrpc":"2.0","params":{"username":"{{username}}","password":"{{password}}"},"method":"web.Login"}
 
-    payloads:
-      username:
-        - minioadmin
-      password:
-        - minioadmin
-    attack: pitchfork
+    {"id":1,"jsonrpc":"2.0","params":{"username":"minioadmin","password":"minioadmin"},"method":"Web.Login"}
 
-    matchers-condition: and
-    matchers:
-
-      - type: word
-        words:
-          - "Content-Type: application/json"
-        part: header
-
-      - type: word
-        words:
-          - 'uiVersion'
-          - 'token'
-        part: body
-        condition: and
-
-      - type: status
-        status:
-          - 200
+    '
+  threads: 100

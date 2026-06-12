@@ -5,13 +5,10 @@ info:
   author: cyllective
   severity: info
   description: Detects Grav CMS
-  reference:
-    - https://github.com/getgrav/grav
   tags: tech,grav,cms
-  metadata:
-    max-request: 1
+  references: https://github.com/getgrav/grav
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
