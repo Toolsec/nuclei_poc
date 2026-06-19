@@ -10,10 +10,11 @@ info:
     - https://github.com/hyperdxio/hyperdx
     - https://www.hyperdx.io/
   metadata:
+    runzero-match: service["http.body"] matches "(?i)hyperdx"
     max-request: 1
     verified: true
     shodan-query: html:"hyperdx"
-  tags: panel,hyperdx,detect
+  tags: panel,hyperdx,detect,discovery
 
 http:
   - method: GET
@@ -34,4 +35,4 @@ http:
         regex:
 
           - '(?i)"version":"([0-9.]+)"'
-# digest: 4b0a00483046022100c4c2b1c9667cd372634301a10175147bd18627effc89035938c3248bfceb18f6022100d497d8b0653e1bf6733aa1b242fd8e02a89997645fc545938ab995737798b76e:922c64590222798bb761d5b6d8e72950
+
