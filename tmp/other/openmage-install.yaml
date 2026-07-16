@@ -4,9 +4,14 @@ info:
   name: OpenMage Installation Wizard
   author: DhiyaneshDk
   severity: high
+  description: OpenMage is susceptible to the Installation page exposure due to misconfiguration.
+  classification:
+    cpe: cpe:2.3:a:openmage:openmage:*:*:*:*:*:*:*:*
   metadata:
     verified: true
     max-request: 1
+    vendor: openmage
+    product: openmage
     shodan-query: title:"OpenMage Installation Wizard"
   tags: misconfig,openmage,install,exposure
 
@@ -25,5 +30,4 @@ http:
       - type: status
         status:
           - 200
-
-# digest: 4b0a004830460221008b5e54e7d871b243d346280c186042817de9acbbf3bf720daae616f1c0485330022100f41616998eeb2ded8bc49a5e9933758f58c43f4d92343cf7e5ce381f665dee16:922c64590222798bb761d5b6d8e72950
+# digest: 490a004630440220359cb1ff7c06313bd2043626b73020cb86f455511d199de99317b4c64ade3d3402204846861015ef3cb7d82f30fb71a889a5b61c37b9e77bb4c6130ba7049491fddc:922c64590222798bb761d5b6d8e72950

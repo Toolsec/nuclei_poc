@@ -1,23 +1,28 @@
 id: fiorilaunchpad-logon
 
 info:
-  name: FioriLaunchpad Logon
+  name: Fiori Launchpad Login Panel - Detect
   author: dhiyaneshDK
   severity: info
-  reference: https://www.exploit-db.com/ghdb/6793
-  tags: panel
+  description: Fiori Launchpad login panel was detected.
+  reference:
+    - https://www.exploit-db.com/ghdb/6793
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-200
+    cpe: cpe:2.3:a:sap:fiori_launchpad:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    vendor: sap
+    product: fiori_launchpad
+    google-query: sap/bc/ui5_ui5/ui2/ushell/shells/abap/fiorilaunchpad.html -site:sap.com
+  tags: panel,edb,sap
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?saml2=disabled'
 
-    raw:
-      - |
-        GET /sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?saml2=disabled HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55
     matchers-condition: and
     matchers:
       - type: word
@@ -25,6 +30,8 @@ requests:
           - "<title>Logon</title>"
           - "fioriLogin"
         condition: and
+
       - type: status
         status:
           - 200
+# digest: 4a0a00473045022100dc6ffc07acd61ff3b44909812c82b9fddfc844fdf5531e284b9aa2bf9d11b4d102202e15782f081e69af9641524d75d5a6dba46194fe6aa03a3a8bf51a8af8c9b230:922c64590222798bb761d5b6d8e72950

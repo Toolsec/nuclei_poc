@@ -4,9 +4,14 @@ info:
   name: OwnCloud Installer Exposure
   author: DhiyaneshDk
   severity: high
+  description: OwnCloud is susceptible to the Installation page exposure due to misconfiguration.
+  classification:
+    cpe: cpe:2.3:a:owncloud:owncloud:*:*:*:*:*:*:*:*
   metadata:
     verified: true
     max-request: 2
+    vendor: owncloud
+    product: owncloud
     shodan-query: title:"owncloud"
   tags: misconfig,owncloud,exposure,install
 
@@ -35,5 +40,4 @@ http:
       - type: status
         status:
           - 200
-
-# digest: 4b0a00483046022100a0f4a054cd9a501720ce31218be12d599b1e5e67e2690dd158f9c003779a0f44022100d97e0ca181ae8454df3920d5eb373b9955ad3b7f3c6521c1b2ff3a95f95cfbd2:922c64590222798bb761d5b6d8e72950
+# digest: 4b0a00483046022100d990873b1c2c45e032a9456bd61d60f501bf7bbe47a14c73bff73048c83a5baa022100f30047c095d34076de593596304c23e464d12c9f9f3497eac8e545455e164112:922c64590222798bb761d5b6d8e72950

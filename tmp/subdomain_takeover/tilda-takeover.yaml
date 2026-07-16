@@ -4,6 +4,7 @@ info:
   name: tilda takeover detection
   author: pdteam
   severity: high
+  description: Tilda takeover was detected.
   reference:
     - https://github.com/EdOverflow/can-i-take-over-xyz/issues/155
   metadata:
@@ -30,4 +31,8 @@ http:
           - "<title>Please renew your subscription</title>"
         negative: true
 
-# digest: 4b0a0048304602210094a4dfcab2ceaf552aeea0d3e2dc64b9c74e7bc585918cf5b6d943c68a992c8f022100f371cf922fd387d48425d5063c43363fefdd4fabd6c98dda8a72f72852e6d543:922c64590222798bb761d5b6d8e72950
+    extractors:
+      - type: dsl
+        dsl:
+          - cname
+# digest: 4a0a0047304502204f9aecbbad3dbdc6779d3a34e3c3e5cb7a4a6ef1f1f24fbcbd6694009281f6940221008d97845aedf4cfec2517de51b44d2ac941e999e8207f0e91fda63b78a2010784:922c64590222798bb761d5b6d8e72950

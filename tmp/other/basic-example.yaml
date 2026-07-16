@@ -1,18 +1,16 @@
 id: basic-example
-
 info:
-  name: Test HTTP Template
   author: pdteam
+  name: Test HTTP Template
   severity: info
-  reference: |
-    test case where version warning is shown when env `SHOW_DSL_ERRORS=true` is set
-
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}"
-
-    matchers:
-      - type: dsl
-        dsl:
-          - compare_versions("GG", '< 4.8.5')
+requests:
+- extractors:
+  - dsl:
+    - a1
+    type: dsl
+  method: GET
+  path:
+  - '{{BaseURL}}/?x={{a1}}'
+  - '{{BaseURL}}/?x={{a1}}'
+variables:
+  a1: '{{to_lower(rand_base(5))}}'

@@ -4,9 +4,14 @@ info:
   name: SMF Installer
   author: DhiyaneshDk
   severity: high
+  description: SMF is susceptible to the Installation page exposure due to misconfiguration.
+  classification:
+    cpe: cpe:2.3:a:simplemachines:simple_machine_forum:*:*:*:*:*:*:*:*
   metadata:
     verified: true
     max-request: 1
+    vendor: simplemachines
+    product: simple_machine_forum
     shodan-query: title:"SMF Installer"
   tags: misconfig,smf,install,exposure
 
@@ -32,5 +37,4 @@ http:
       - type: status
         status:
           - 200
-
-# digest: 490a0046304402201f29cbfd0e6d654e0c2f890a15fe57fbd254f8cad796ca33a458ffcabca26a7a02200e0003c2dce897b6640cbd394b357c9c884aef53f1377bbdc31145f24c7f8ab4:922c64590222798bb761d5b6d8e72950
+# digest: 4b0a00483046022100f0db6569d9560c1f8888a0970f08d7cc55d4d7172413edba63db2a526ac920d3022100b779960ac578babf8d8c63ff35d10ddd248150f163ea0a490d56267f43b350ae:922c64590222798bb761d5b6d8e72950
