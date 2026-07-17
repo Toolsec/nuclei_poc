@@ -4,22 +4,17 @@ info:
   name: ViewPoint System Status
   author: dhiyaneshDK
   severity: low
-  reference: https://www.shodan.io/search?query=http.title%3A%22ViewPoint+System+Status%22
-  tags: status,exposures
+  description: ViewPoint System status page is exposed.
+  metadata:
+    max-request: 1
+    shodan-query: http.title:"ViewPoint System Status"
+  tags: status,exposure,viewpoint,misconfig
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
 
-    raw:
-      - |
-        GET / HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
@@ -29,3 +24,4 @@ requests:
       - type: status
         status:
           - 200
+# digest: 4b0a00483046022100ddb07de442170f724a6a2d1c8ee3165b3b9ce6a1427710750556219229eabf1202210091f2a704070f0143d7f24af792065350061e54742da2eedc5bc663afe25b392b:922c64590222798bb761d5b6d8e72950

