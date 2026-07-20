@@ -4,26 +4,42 @@ info:
   name: Redis Service - Detect
   author: pussycat0x
   severity: info
-  verified: true
-  description: |-
-    Redis service was detected.
-  tags: network,redis,fingerprint
-  created: 2023/08/07
+  description: Redis service was detected.
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-200
+  metadata:
+    verified: true
+    max-request: 2
+    shodan-query:
+      - product:"redis"
+      - http.title:"airflow - dags" || http.html:"apache airflow"
+      - http.title:"sign in - airflow"
+    product: airflow
+    vendor: apache
+    fofa-query:
+      - apache airflow
+      - title="airflow - dags" || http.html:"apache airflow"
+      - title="sign in - airflow"
+    google-query:
+      - intitle:"airflow - dags" || http.html:"apache airflow"
+      - intitle:"sign in - airflow"
+  tags: network,redis,detect,detection,tcp
+tcp:
+  - inputs:
+      - data: "*1\r\n$4\r\ninfo\r\n"
 
-set:
-  host: request.url.host
-rules:
-  r0:
-    request:
-      type: tcp
-      host: "{{host}}"
-      steps:
-        - write:
-            data: "*1\r\n$4\r\ninfo\r\n"
-        - read:
-            read-size: 8192
-            read-timeout: 3
-            read-type: bytes
-            save-as: reply
-    expression: reply.bcontains(b'DENIED Redis') || reply.bcontains(b'CONFIG REWRITE') || reply.bcontains(b'NOAUTH Authentication') || reply.bcontains(b'72656469735f76657273696f6')
-expression: r0()
+    host:
+      - "{{Hostname}}"
+      - "tls://{{Hostname}}"
+    port: 6379,6380
+    read-size: 1024
+
+    matchers:
+      - type: word
+        words:
+          - "DENIED Redis"
+          - "CONFIG REWRITE"
+          - "NOAUTH Authentication"
+        condition: or
+# digest: 4b0a00483046022100b9fde9c2c2384e0f8a75398d11503cf5691a2c904b3d41ebdfd26be6e4e669e8022100da2a8d6b51edf59f359239a031b1c77c54de3a71e944b20bda304af4909efada:922c64590222798bb761d5b6d8e72950

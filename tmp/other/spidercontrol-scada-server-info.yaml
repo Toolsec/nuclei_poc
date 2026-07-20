@@ -4,23 +4,32 @@ info:
   name: SpiderControl SCADA Web Server - Sensitive Information Exposure
   author: geeknik
   severity: high
-  verified: true
-  description: |-
-    SpiderControl SCADA Web Server is vulnerable to sensitive information exposure. Numerous, market-leading OEM manufacturers - from a wide variety of industries - rely on SpiderControl.
-    fofa: "SpiderControl"
+  description: SpiderControl SCADA Web Server is vulnerable to sensitive information exposure. Numerous, market-leading OEM manufacturers - from a wide variety of industries - rely on SpiderControl.
   reference:
     - https://spidercontrol.net/spidercontrol-inside/
   tags: spidercontrol,scada,exposure,misconfig
-  created: 2024/03/18
+  metadata:
+    max-request: 1
 
-rules:
-  r0:
-    request:
-      method: GET
-      path: /cgi-bin/GetSrvInfo.exe
-    expression: |
-      response.status == 200 &&
-      response.body.bcontains(b'powered by SpiderControl') &&
-      response.body.bcontains(b'LSWEBSERVER') &&
-      response.body.bcontains(b'SCWEBSERVICES')
-expression: r0()
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}/cgi-bin/GetSrvInfo.exe'
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "powered by SpiderControl"
+          - "LSWEBSERVER"
+          - "SCWEBSERVICES"
+        condition: and
+    extractors:
+      - type: kval
+        part: header
+        kval:
+          - Server
+
+# Enhanced by mp on 2022/07/21

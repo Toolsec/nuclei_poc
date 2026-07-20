@@ -1,23 +1,26 @@
 id: openemr-detect
 
 info:
-  name: OpenEMR Product Registration Panel - Detect
+  name: OpenEMR Product Detect
   author: pussycat0x
   severity: info
-  verified: true
-  description: |-
-    OpenEMR Product Registration panel was detected.
-    fofa: app="OpenEMR"
-    shodan: http.html:"OpenEMR"
+  metadata:
+    fofa-query: app="OpenEMR"
+    shodan-query: http.html:"OpenEMR"
   tags: panel,openemr
-  created: 2023/06/17
 
-rules:
-  r0:
-    request:
-      method: GET
-      path: /interface/login/login.php?site=default
-    expression: |
-      response.status == 200 && 
-      response.body.bcontains(b'"title":"OpenEMR Product Registration"')
-expression: r0()
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/interface/login/login.php?site=default"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"title":"OpenEMR Product Registration"'
+
+      - type: status
+        status:
+          - 200
