@@ -1,29 +1,32 @@
-http:
-- matchers:
-  - part: body
-    type: word
-    words:
-    - <title>MeTube</title>
-  - status:
-    - 200
-    type: status
-  matchers-condition: and
-  method: GET
-  path:
-  - '{{BaseURL}}'
 id: metube-detect
-info:
-  author: rxerium
-  description: 'A MeTube instance was detected.
 
-    '
-  metadata:
-    max-request: 1
-    runzero-match: any(each(service["html.titles"]), {# matches "(?i)MeTube"})
-    shodan-query: http.title:MeTube
-    verified: true
+info:
   name: MeTube Instance Detected
-  reference:
-  - https://github.com/alexta69/metube
+  author: rxerium
   severity: info
-  tags: metube,detect,panel,login,discovery
+  description: |
+    A MeTube instance was detected.
+  reference:
+    - https://github.com/alexta69/metube
+  metadata:
+    verified: true
+    shodan-query: http.title:MeTube
+    max-request: 1
+  tags: metube,detect,panel,login
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "<title>MeTube</title>"
+
+      - type: status
+        status:
+          - 200
+# digest: 4a0a00473045022100a3d9513044fac7161c631e1d4f17c59948aafdab2e25d73827052180cad70ac00220694c045038f114ac5860e3f7a09f152ad925d79cb7f17654d71ce07e4701e853:922c64590222798bb761d5b6d8e72950
