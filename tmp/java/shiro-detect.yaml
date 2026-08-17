@@ -1,31 +1,16 @@
 id: shiro-detect
-
 info:
-  name: Shiro Detect
-  author: zan8in
+  name: Detect Shiro Framework
+  author: AresX
   severity: info
-  verified: true
-  description: |-
-    fofa: app="APACHE-Shiro"
-  tags: shiro,detect,fingerprint
-  created: 2023/07/01
-
-set:
-  randstr: randomLowercase(6)
-rules:
-  r0:
-    request:
-      method: GET
-      path: /
-      follow_redirects: true
-      headers:
-        cookie: JSESSIONID={{randstr}};rememberMe=123
-    expression: response.raw_header.bcontains(b'rememberMe=deleteMe')
-  r1:
-    request:
-      method: GET
-      path: /
-      headers:
-        cookie: JSESSIONID={{randstr}};rememberMe=123
-    expression: response.raw_header.bcontains(b'rememberMe=deleteMe')
-expression: r0() || r1()
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
+    headers:
+      Cookie: rememberMe=123;
+    matchers:
+      - type: word
+        words:
+          - rememberMe=deleteMe
+        part: header
