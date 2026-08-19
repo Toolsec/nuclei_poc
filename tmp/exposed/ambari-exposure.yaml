@@ -7,12 +7,10 @@ info:
   description: An Apache Ambari panel was discovered.
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0
     cwe-id: CWE-668
-    cpe: cpe:2.3:a:apache:ambari:*:*:*:*:*:*:*:*
   metadata:
     max-request: 1
-    vendor: apache
-    product: ambari
   tags: panel,apache,ambari,exposure
 
 http:
@@ -26,4 +24,5 @@ http:
           - '<title>Ambari</title>'
           - 'href="http://www.apache.org/licenses/LICENSE-2.0"'
         condition: and
-# digest: 4a0a00473045022100a7cd3582c3e2f83adc8c2cd6891b6b7fae253b6180d8ada0356ff348f395377d022011048d53eb102cfb96ba8f20f25ce688f1f923a96104bb8117b00e0f9c3c8b6e:922c64590222798bb761d5b6d8e72950
+
+# digest: 490a004630440220544aae7cbecb6d11b6a7e12bc9b1e744bb8f5b8f111bdf2cdf819122ea6cfc96022031d80f2d81ba3674354e839f973d996463ef6f27525f632cc10be84ed9ab48e7:922c64590222798bb761d5b6d8e72950

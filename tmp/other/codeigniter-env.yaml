@@ -5,9 +5,11 @@ info:
   author: emenalf
   severity: high
   description: Codeigniter .env file was discovered.
+  classification:
+    cwe-id: CWE-552
   metadata:
     max-request: 12
-  tags: config,exposure,codeigniter
+  tags: config,exposure,codeigniter,vuln
 
 http:
   - method: GET
@@ -39,4 +41,4 @@ http:
       - type: status
         status:
           - 200
-# digest: 4a0a0047304502206d6e78826d4ac6f8c173b6343594f6a6a5f5c2a24a062e20442d8d1c5b43b553022100da4b4e0f4ce7f5e74b664019f89e1c5b6144c59b73202b55720025f63e51560d:922c64590222798bb761d5b6d8e72950
+# digest: 4a0a00473045022029ee1df24e3b205804ca5b2bb5c1e54bfacd36b56d547eac30564adb954de06c022100b7b2d0659659ecdfb5d2425d86548fd01cfef445f20fcc10d28bf85bee9dbf35:922c64590222798bb761d5b6d8e72950

@@ -4,14 +4,9 @@ info:
   name: PCDN Cache Node Dataset
   author: DhiyaneshDk
   severity: low
-  description: PCDN Cache Node dataset is exposed.
-  classification:
-    cpe: cpe:2.3:a:cache-base_project:cache-base:*:*:*:*:node.js:*:*:*
   metadata:
     verified: true
     max-request: 1
-    vendor: cache-base_project
-    product: cache-base
     shodan-query: title:"PCDN Cache Node Dataset"
   tags: node,pcdn,misconfig
 
@@ -38,4 +33,5 @@ http:
       - type: status
         status:
           - 200
-# digest: 490a0046304402200a3a8ac11e5737849ba5018a0a34591645482c8348b9e4f20dfbef9ab6a0fd0802200caee61e088bd8a23d53109220fb2869a7e6d6cc01d74458c48104b775655212:922c64590222798bb761d5b6d8e72950
+
+# digest: 490a00463044022031889ccaa0fb2cc753edd1a5d0d507a21216414884d740b29221451a2ce7b2c902200fde6d8a680be62081667a12f0d7f630c05a885414275e3d4ba6fa6a3fcf5dbb:922c64590222798bb761d5b6d8e72950
