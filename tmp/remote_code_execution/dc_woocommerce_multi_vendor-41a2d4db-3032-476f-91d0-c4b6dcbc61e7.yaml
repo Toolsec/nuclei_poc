@@ -1,4 +1,4 @@
-id: CVE-2026-66651-dc_woocommerce_multi_vendor-41a2d4db-3032-476f-91d0-c4b6dcbc61e7
+id: dc_woocommerce_multi_vendor-41a2d4db-3032-476f-91d0-c4b6dcbc61e7
 
 info:
   name: >
@@ -6,19 +6,19 @@ info:
   author: topscoder
   severity: high
   description: >
-    The MultiVendorX – WooCommerce Multivendor Marketplace AI Powered Solutions plugin for WordPress is vulnerable to unauthorized access in all versions up to, and including, 5.0.15. This is due to a missing capability check on a function. This makes it possible for unauthenticated attackers to perform an unauthorized action.
+    
   reference:
     - https://github.com/topscoder/nuclei-wordfence-cve
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/41a2d4db-3032-476f-91d0-c4b6dcbc61e7?source=api-prod
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/41a2d4db-3032-476f-91d0-c4b6dcbc61e7?source=api-scan
   classification:
-    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
-    cvss-score: 5.3
-    cve-id: CVE-2026-66651
+    cvss-metrics: 
+    cvss-score: 
+    cve-id: 
   metadata:
     fofa-query: "wp-content/plugins/dc-woocommerce-multi-vendor/"
     google-query: inurl:"/wp-content/plugins/dc-woocommerce-multi-vendor/"
     shodan-query: 'http.html:"wp-content/plugins/dc-woocommerce-multi-vendor/"'
-  tags: cve,wordpress,wp-plugin,dc-woocommerce-multi-vendor,high,production
+  tags: cve,wordpress,wp-plugin,dc-woocommerce-multi-vendor,high,candidate
 
 http:
   - method: GET
