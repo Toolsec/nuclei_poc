@@ -4,16 +4,11 @@ info:
   name: Loytec Device Info Detection
   author: pussycat0x
   severity: info
-  description: Loytec Device info panel was detected.
-  classification:
-    cpe: cpe:2.3:h:loytec:lvis-3me:*:*:*:*:*:*:*:*
   metadata:
     verified: true
     max-request: 1
-    vendor: loytec
-    product: lvis-3me
     shodan-query: "loytec"
-  tags: iot,loytec,discovery
+  tags: iot,loytec
 
 http:
   - method: GET
@@ -31,4 +26,5 @@ http:
       - type: status
         status:
           - 200
-# digest: 4a0a004730450220782d286ecc99f978bd7f753905b4cc8c74866502fca579e862d1825e386b17c7022100f944172f0f28e0595fdc0670b7eab4c2c8b76e47ec8f55298ab9bb00391e046d:922c64590222798bb761d5b6d8e72950
+
+# digest: 490a0046304402207b022c9b325ce140c946d508a5d505cb7df0a6e636da06046316135c2f50104d02207aed5e93676d511b23e507f19dc9bb8ab3811c5704e09c6a0b97f13094e3862e:922c64590222798bb761d5b6d8e72950
