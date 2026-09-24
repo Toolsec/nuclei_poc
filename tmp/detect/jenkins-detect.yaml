@@ -14,9 +14,13 @@ info:
     max-request: 2
     vendor: jenkins
     product: jenkins
-    shodan-query: http.favicon.hash:81586312
+    shodan-query:
+      - http.favicon.hash:81586312
+      - cpe:"cpe:2.3:a:jenkins:jenkins"
+      - product:"jenkins"
     category: devops
-  tags: tech,jenkins,detect
+    fofa-query: icon_hash=81586312
+  tags: tech,jenkins,detect,discovery
 
 http:
   - method: GET
@@ -49,4 +53,4 @@ http:
       - type: kval
         kval:
           - version
-# digest: 4a0a00473045022003514a46c47a8f73f88d42fb0a4e926f061dd40fe52f73d4c00d633f502390460221008cd44f6ac8838884dc8fada8490ef3c3dfa9b36b9efb55e650fe19a4d083bfa6:922c64590222798bb761d5b6d8e72950
+# digest: 4a0a00473045022016d82ab887348c47343206dc7340680dcd754d73058a3c8a7fea33dd49817611022100d1c7c28c4bd1279e75b96dd1e0c532a9c872cac6a9747e1cfd1e4e95484a097c:922c64590222798bb761d5b6d8e72950
